@@ -17,11 +17,16 @@ code {
 }
 
 .container {
-  max-width: 960px;
+  width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.container h5 {
+  font-weight: 400;
+  align-self: flex-start;
 }
 
 .header {
@@ -40,4 +45,10 @@ code {
 .btc-price h4 {
   display: flex;
   align-items: center;
+}
+
+.input-line {
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
 }
