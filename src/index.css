@@ -31,3 +31,13 @@ code {
   font-weight: bold;
   font-size: 60px;
 }
+
+.btc-price {
+  display: flex;
+  gap: 2rem;
+}
+
+.btc-price h4 {
+  display: flex;
+  align-items: center;
+}
