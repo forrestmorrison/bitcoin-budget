@@ -10,6 +10,7 @@ function App() {
   const [coin, setCoin] = useState([])
   const [currencyAmt, setCurrencyAmt] = useState("")
   const [currency, setCurrency] = useState("")
+  const [frequency, setFrequency] = useState("")
   
   const currentPrice = coin[0]
 
@@ -19,6 +20,10 @@ function App() {
 
   const onCurrencyChange = (e) => {
     setCurrency(e.target.value)
+  }
+
+  const onFrequencyChange = (e) => {
+    setFrequency(e.target.value)
   }
 
   const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=1&page=1&sparkline=false&locale=en&precision=2"
@@ -41,7 +46,26 @@ function App() {
         value: "USD",
         label: "USD"
     },
-]
+  ]
+
+  const frequencies = [
+    {
+        value: "none",
+        label: ""
+    },
+    {
+        value: "once per day",
+        label: "once per day"
+    },
+    {
+        value: "once per week",
+        label: "once per week"
+    },
+    {
+        value: "once per month",
+        label: "once per month"
+    }
+  ]
 
   return (
     <div className="App">
@@ -64,7 +88,8 @@ function App() {
             value={currencyAmt}
             required
             sx={{
-                m: 1
+                m: 1,
+                width: "300px"
             }}
           />
           <TextField 
@@ -82,6 +107,30 @@ function App() {
               }}
           >
               {currencies.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                  </MenuItem>
+              ))}
+          </TextField>
+        </div>
+        <h5>frequency rate to make recurring purchase:</h5>
+        <div className="input-line">
+          <TextField 
+              id="outlined-select"
+              select
+              label="frequency"
+              defaultValue=""
+              helperText="select frequency"
+              variant="outlined"
+              onChange={onFrequencyChange}
+                  value={frequency}
+                  required
+              sx={{
+                  m: 1,
+                  width: "300px"
+              }}
+          >
+              {frequencies.map((option) => (
                   <MenuItem key={option.value} value={option.value}>
                       {option.label}
                   </MenuItem>
