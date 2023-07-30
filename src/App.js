@@ -127,7 +127,7 @@ function App() {
       <div className="App">
         <header className="header">
           <div className="logo">
-            <FaBitcoin size="60px" style={{ margin: "10px", marginTop: "10px", color: "#F2A900"}}/>
+            <FaBitcoin size="50px" style={{ margin: "10px", marginTop: "15px", color: "#F2A900"}}/>
             Bitcoin Budget
           </div>
           <div className="btc-price">
@@ -162,6 +162,7 @@ function App() {
                 required
                 sx={{
                     m: 0.2,
+                    width: "150px"
                 }}
             >
                 {currencies.map((option) => (
@@ -178,7 +179,6 @@ function App() {
                 select
                 label="frequency"
                 defaultValue=""
-                helperText="select frequency"
                 variant="outlined"
                 onChange={onFrequencyChange}
                     value={frequency}
@@ -188,11 +188,11 @@ function App() {
                     width: "300px"
                 }}
             >
-                {frequencies.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
+              {frequencies.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
             </TextField>
           </div>
           <h5>total amount of time to keep making recurring purchase:</h5>
@@ -214,13 +214,13 @@ function App() {
               select
               label="time period"
               defaultValue=""
-              helperText="select time period"
               variant="outlined"
               onChange={onTimePeriodChange}
               value={timePeriod}
               required
               sx={{
-                  m: 0.2
+                  m: 0.2,
+                  width: "150px"
               }}
             >
               {timePeriods.map((option) => (
@@ -232,15 +232,21 @@ function App() {
           </div>
           <h5>at price of:</h5>
           <div className="input-line">
-            <FormControl>
+            <FormControl
+              sx={{
+                width: 1
+              }}
+            >
               <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="female"
-                  name="radio-buttons-group"
-                  sx={{
-                      display: "flex",
-                      flexDirection: "row"
-                  }}
+                aria-labelledby="demo-radio-buttons-group-label"
+                defaultValue="female"
+                name="radio-buttons-group"
+                sx={{
+                  width: 1,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between"
+                }}
               >
                 <FormControlLabel 
                   value="current-btc-price" 
@@ -265,6 +271,7 @@ function App() {
             <Button
               sx={{
                 m: 1,
+                px: 2,
                 backgroundColor: "#F2A900",
                 color: "white",
                   "&:hover": {
