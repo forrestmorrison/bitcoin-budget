@@ -35,6 +35,13 @@ code {
 
 .header {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
@@ -43,7 +50,7 @@ code {
 
 .btc-price {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .btc-price h4 {

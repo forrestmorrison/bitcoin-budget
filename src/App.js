@@ -3,7 +3,12 @@ import { FaBitcoin } from "react-icons/fa"
 import { ThemeProvider } from "@emotion/react"
 import { createTheme } from "@mui/material/styles"
 import {
+  Button,
   MenuItem,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
   TextField
 } from "@mui/material"
 import axios from "axios"
@@ -32,6 +37,8 @@ function App() {
   const [frequency, setFrequency] = useState("")
   const [timeAmt, setTimeAmt] = useState("")
   const [timePeriod, setTimePeriod] = useState("")
+  const [price, setPrice] = useState(0)
+  const [total, setTotal] = useState(0)
   
   const currentPrice = coin[0]
 
@@ -119,14 +126,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <div className="App">
         <header className="header">
-          <FaBitcoin size="60px" style={{ margin: "10px", marginTop: "12px", color: "#F2A900"}}/>
-          Bitcoin Budget
-        </header>
-        <div className="container">
+          <div className="logo">
+            <FaBitcoin size="60px" style={{ margin: "10px", marginTop: "10px", color: "#F2A900"}}/>
+            Bitcoin Budget
+          </div>
           <div className="btc-price">
             <h4>Current <FaBitcoin size="18px" style={{ margin: "0px 10px", color: "#F2A900"}}/> Price:</h4>
             <h4>${}</h4>
           </div>
+        </header>
+        <div className="container">
           <h5>amount you would like to purchase on a recurring basis:</h5>
           <div className="input-line">
             <TextField 
@@ -137,7 +146,7 @@ function App() {
               value={currencyAmt}
               required
               sx={{
-                  m: 1,
+                  m: 0.2,
                   width: "300px"
               }}
             />
@@ -152,7 +161,7 @@ function App() {
                 value={currency}
                 required
                 sx={{
-                    m: 1,
+                    m: 0.2,
                 }}
             >
                 {currencies.map((option) => (
@@ -175,7 +184,7 @@ function App() {
                     value={frequency}
                     required
                 sx={{
-                    m: 1,
+                    m: 0.2,
                     width: "300px"
                 }}
             >
@@ -196,7 +205,7 @@ function App() {
               value={timeAmt}
               required
               sx={{
-                  m: 1,
+                  m: 0.2,
                   width: "300px"
               }}
             />
@@ -211,7 +220,7 @@ function App() {
               value={timePeriod}
               required
               sx={{
-                  m: 1
+                  m: 0.2
               }}
             >
               {timePeriods.map((option) => (
@@ -220,6 +229,37 @@ function App() {
                 </MenuItem>
               ))}
             </TextField>
+          </div>
+          <h5>at price of:</h5>
+          <div className="input-line">
+            <FormControl>
+              <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="female"
+                  name="radio-buttons-group"
+                  sx={{
+                      display: "flex",
+                      flexDirection: "row"
+                  }}
+              >
+                <FormControlLabel 
+                  value="current-btc-price" 
+                  control={<Radio />} 
+                  label={"current BTC price"}
+                  sx={{
+                      m: 0.2
+                  }}
+                />
+                <FormControlLabel 
+                  value="target-btc-price" 
+                  control={<Radio />} 
+                  label={<TextField label="enter target BTC price" />} 
+                  sx={{
+                      m: 0.2
+                  }}
+                />
+              </RadioGroup>
+            </FormControl>
           </div>
         </div>
       </div>
