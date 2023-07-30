@@ -1,10 +1,29 @@
 import { useState, useEffect } from "react"
 import { FaBitcoin } from "react-icons/fa"
+import { ThemeProvider } from "@emotion/react"
+import { createTheme } from "@mui/material/styles"
 import {
   MenuItem,
   TextField
 } from "@mui/material"
 import axios from "axios"
+
+const theme = createTheme({
+  palette: {
+      primary: {
+          main: '#F2A900'
+      }
+  },
+  typography: {
+    fontFamily: [
+      "Ubuntu",
+    ],
+    button: {
+      textTransform: 'none',
+      fontWeight: "bold"
+    }
+  }
+})
 
 function App() {
   const [coin, setCoin] = useState([])
@@ -97,112 +116,114 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <div className="container">
+    <ThemeProvider theme={theme}>
+      <div className="App">
         <header className="header">
-            <FaBitcoin size="60px" style={{ margin: "10px", marginTop: "12px", color: "#F2A900"}}/>
-            Bitcoin Budget
+          <FaBitcoin size="60px" style={{ margin: "10px", marginTop: "12px", color: "#F2A900"}}/>
+          Bitcoin Budget
         </header>
-        <div className="btc-price">
-          <h4>Current <FaBitcoin size="18px" style={{ margin: "0px 10px", color: "#F2A900"}}/> Price:</h4>
-          <h4>${}</h4>
-        </div>
-        <h5>amount you would like to purchase on a recurring basis:</h5>
-        <div className="input-line">
-          <TextField 
-            id="outlined-basic" 
-            label="currency amount"
-            variant="outlined"
-            onChange={onCurrencyAmtChange}
-            value={currencyAmt}
-            required
-            sx={{
-                m: 1,
-                width: "300px"
-            }}
-          />
-          <TextField 
-              id="outlined-select"
-              select
-              label="currency"
-              defaultValue=""
-              helperText="select btc or usd"
+        <div className="container">
+          <div className="btc-price">
+            <h4>Current <FaBitcoin size="18px" style={{ margin: "0px 10px", color: "#F2A900"}}/> Price:</h4>
+            <h4>${}</h4>
+          </div>
+          <h5>amount you would like to purchase on a recurring basis:</h5>
+          <div className="input-line">
+            <TextField 
+              id="outlined-basic" 
+              label="currency amount"
               variant="outlined"
-              onChange={onCurrencyChange}
-              value={currency}
+              onChange={onCurrencyAmtChange}
+              value={currencyAmt}
               required
-              sx={{
-                  m: 1,
-              }}
-          >
-              {currencies.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                  </MenuItem>
-              ))}
-          </TextField>
-        </div>
-        <h5>frequency rate to make recurring purchase:</h5>
-        <div className="input-line">
-          <TextField 
-              id="outlined-select"
-              select
-              label="frequency"
-              defaultValue=""
-              helperText="select frequency"
-              variant="outlined"
-              onChange={onFrequencyChange}
-                  value={frequency}
-                  required
               sx={{
                   m: 1,
                   width: "300px"
               }}
-          >
-              {frequencies.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                  </MenuItem>
+            />
+            <TextField 
+                id="outlined-select"
+                select
+                label="currency"
+                defaultValue=""
+                helperText="select btc or usd"
+                variant="outlined"
+                onChange={onCurrencyChange}
+                value={currency}
+                required
+                sx={{
+                    m: 1,
+                }}
+            >
+                {currencies.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                    </MenuItem>
+                ))}
+            </TextField>
+          </div>
+          <h5>frequency rate to make recurring purchase:</h5>
+          <div className="input-line">
+            <TextField 
+                id="outlined-select"
+                select
+                label="frequency"
+                defaultValue=""
+                helperText="select frequency"
+                variant="outlined"
+                onChange={onFrequencyChange}
+                    value={frequency}
+                    required
+                sx={{
+                    m: 1,
+                    width: "300px"
+                }}
+            >
+                {frequencies.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                    </MenuItem>
+                ))}
+            </TextField>
+          </div>
+          <h5>total amount of time to keep making recurring purchase:</h5>
+          <div className="input-line">
+            <TextField 
+              id="outlined-basic" 
+              label="time amount" 
+              variant="outlined"
+              onChange={onTimeAmtChange}
+              value={timeAmt}
+              required
+              sx={{
+                  m: 1,
+                  width: "300px"
+              }}
+            />
+            <TextField 
+              id="outlined-select"
+              select
+              label="time period"
+              defaultValue=""
+              helperText="select time period"
+              variant="outlined"
+              onChange={onTimePeriodChange}
+              value={timePeriod}
+              required
+              sx={{
+                  m: 1
+              }}
+            >
+              {timePeriods.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
               ))}
-          </TextField>
-        </div>
-        <h5>total amount of time to keep making recurring purchase:</h5>
-        <div className="input-line">
-          <TextField 
-            id="outlined-basic" 
-            label="time amount" 
-            variant="outlined"
-            onChange={onTimeAmtChange}
-            value={timeAmt}
-            required
-            sx={{
-                m: 1,
-                width: "300px"
-            }}
-          />
-          <TextField 
-            id="outlined-select"
-            select
-            label="time period"
-            defaultValue=""
-            helperText="select time period"
-            variant="outlined"
-            onChange={onTimePeriodChange}
-            value={timePeriod}
-            required
-            sx={{
-                m: 1
-            }}
-          >
-            {timePeriods.map((option) => (
-              <MenuItem key={option.value} value={option.value}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </TextField>
+            </TextField>
+          </div>
         </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 

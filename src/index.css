@@ -16,8 +16,11 @@ code {
     monospace;
 }
 
+.App {
+  max-width: 500px;
+}
+
 .container {
-  max-width: 600px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -49,7 +52,7 @@ code {
 }
 
 .input-line {
-  width: 600px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
