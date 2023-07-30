@@ -261,6 +261,26 @@ function App() {
               </RadioGroup>
             </FormControl>
           </div>
+          <div className="total-line">
+            <Button
+              sx={{
+                m: 1,
+                backgroundColor: "#F2A900",
+                color: "white",
+                  "&:hover": {
+                    backgroundColor: "white",
+                    color: "#F2A900",
+                  },
+                  "&.Mui-disabled": {
+                    background: "white",
+                    color: "grey"
+                  }
+              }}
+            >
+              Calculate
+            </Button>
+            <h4>total:</h4>
+          </div>
         </div>
       </div>
     </ThemeProvider>
