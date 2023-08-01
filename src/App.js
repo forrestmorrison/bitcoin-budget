@@ -127,8 +127,10 @@ function App() {
       <div className="App">
         <header className="header">
           <div className="logo">
-            <FaBitcoin size="50px" style={{ margin: "10px", marginTop: "15px", color: "#F2A900"}}/>
-            Bitcoin Budget
+            <div className="logo-icon">
+              <FaBitcoin size="auto" style={{ marginRight: "10px", color: "#F2A900"}}/>
+            </div>
+            <h2>Bitcoin Budget</h2>
           </div>
           <div className="btc-price">
             <h4>Current <FaBitcoin size="18px" style={{ margin: "0px 10px", color: "#F2A900"}}/> Price:</h4>
@@ -147,7 +149,10 @@ function App() {
               required
               sx={{
                   m: 0.2,
-                  width: "300px"
+                  width: {
+                    xs: "180px",
+                    sm: "300px"
+                  }
               }}
             />
             <TextField 
@@ -155,14 +160,17 @@ function App() {
                 select
                 label="currency"
                 defaultValue=""
-                helperText="select btc or usd"
+                helperText="btc or usd"
                 variant="outlined"
                 onChange={onCurrencyChange}
                 value={currency}
                 required
                 sx={{
                     m: 0.2,
-                    width: "150px"
+                    width: {
+                      xs: "100px",
+                      sm: "150px"
+                    }
                 }}
             >
                 {currencies.map((option) => (
@@ -185,7 +193,10 @@ function App() {
                     required
                 sx={{
                     m: 0.2,
-                    width: "300px"
+                    width: {
+                      xs: "180px",
+                      sm: "300px"
+                    }
                 }}
             >
               {frequencies.map((option) => (
@@ -206,7 +217,10 @@ function App() {
               required
               sx={{
                   m: 0.2,
-                  width: "300px"
+                  width: {
+                    xs: "180px",
+                    sm: "300px"
+                  }
               }}
             />
             <TextField 
@@ -220,7 +234,10 @@ function App() {
               required
               sx={{
                   m: 0.2,
-                  width: "150px"
+                  width: {
+                    xs: "100px",
+                    sm: "150px"
+                  }
               }}
             >
               {timePeriods.map((option) => (
@@ -261,7 +278,11 @@ function App() {
                   control={<Radio />} 
                   label={<TextField label="enter target BTC price" />} 
                   sx={{
-                      m: 0.2
+                      m: 0.2,
+                      width: {
+                        xs: "120px",
+                        sm: "300px"
+                      }
                   }}
                 />
               </RadioGroup>
