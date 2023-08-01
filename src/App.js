@@ -281,7 +281,7 @@ function App() {
                       m: 0.2,
                       width: {
                         xs: "120px",
-                        sm: "300px"
+                        sm: "190px"
                       }
                   }}
                 />
