@@ -37,8 +37,7 @@ function App() {
   const [frequency, setFrequency] = useState("")
   const [timeAmt, setTimeAmt] = useState("")
   const [timePeriod, setTimePeriod] = useState("")
-  const [price, setPrice] = useState(0)
-  const [total, setTotal] = useState(0)
+  const [price, setPrice] = useState("")
   
   const currentPrice = coin[0]
 
@@ -111,16 +110,32 @@ function App() {
       setTimePeriod(e.target.value)
   }
 
+  const onPriceChange = (e) => {
+    setPrice(e.target.value)
+}
+
+  const currAmtNum = parseInt(currencyAmt)
+  const timeAmtNum = parseInt(timeAmt)
+  const priceNum = parseInt(price)
+
+  const calculateTotal = () => {
+    return currAmtNum * timeAmtNum * priceNum
+  }
+
+  console.log(calculateTotal())
+
+  const total = calculateTotal()
+
   const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=1&page=1&sparkline=false&locale=en&precision=2"
 
-  useEffect(() => {
-    axios.get(url).then((response) => {
-      setCoin(response.data)
-      console.log(response.data[0])
-    }).catch((error) => {
-      console.log(error)
-    })
-  }, [])
+  // useEffect(() => {
+  //   axios.get(url).then((response) => {
+  //     setCoin(response.data)
+  //     console.log(response.data[0])
+  //   }).catch((error) => {
+  //     console.log(error)
+  //   })
+  // }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -270,13 +285,18 @@ function App() {
                   control={<Radio />} 
                   label={"current BTC price"}
                   sx={{
-                      m: 0.2
+                      m: 0.2,
+                      mb: "20px"
                   }}
                 />
                 <FormControlLabel 
-                  value="target-btc-price" 
-                  control={<Radio />} 
-                  label={<TextField label="enter target BTC price" />} 
+                  control={<Radio sx={{ mb: "20px" }} />} 
+                  label={<TextField 
+                            label="enter target BTC price"
+                            helperText="target btc price"
+                            onChange={onPriceChange}
+                            value={price}
+                        />}
                   sx={{
                       m: 0.2,
                       width: {
@@ -308,6 +328,7 @@ function App() {
               Calculate
             </Button>
             <h4>total:</h4>
+            <p>${total}</p>
           </div>
         </div>
       </div>
