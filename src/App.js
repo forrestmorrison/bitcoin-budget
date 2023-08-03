@@ -119,7 +119,16 @@ function App() {
   const priceNum = parseInt(price)
 
   const calculateTotal = () => {
-    return currAmtNum * timeAmtNum * priceNum
+    // return currAmtNum * timeAmtNum * priceNum
+    if (frequency === "once per day" && timePeriod === "days") {
+      return currAmtNum * timeAmt * 1
+    } else if (frequency === "once per day" && timePeriod === "weeks") {
+      return currAmtNum * timeAmt * 7
+    } else if (frequency === "once per day" && timePeriod === "months") {
+      return currAmtNum * timeAmt * 30
+    } else if (frequency === "once per day" && timePeriod === "years") {
+      return currAmtNum * timeAmt * 365
+    }
   }
 
   console.log(calculateTotal())
