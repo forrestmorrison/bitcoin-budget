@@ -121,25 +121,29 @@ function App() {
   const calculateTotal = () => {
     // return currAmtNum * timeAmtNum * priceNum
     if (frequency === "once per day" && timePeriod === "days") {
-      return currAmtNum * timeAmt * 1
+      return (currAmtNum * timeAmt * 1).toFixed(2)
     } else if (frequency === "once per day" && timePeriod === "weeks") {
-      return currAmtNum * timeAmt * 7
+      return (currAmtNum * timeAmt * 7).toFixed(2)
     } else if (frequency === "once per day" && timePeriod === "months") {
-      return currAmtNum * timeAmt * 30
+      return (currAmtNum * timeAmt * 30).toFixed(2)
     } else if (frequency === "once per day" && timePeriod === "years") {
-      return currAmtNum * timeAmt * 365
+      return (currAmtNum * timeAmt * 365).toFixed(2)
     } else if (frequency === "once per week" && timePeriod === "weeks") {
-      return currAmtNum * timeAmt * 1
+      return (currAmtNum * timeAmt * 1).toFixed(2)
     } else if (frequency === "once per week" && timePeriod === "months") {
-      return currAmtNum * timeAmt * 4.28
+      return (currAmtNum * timeAmt * 4.28).toFixed(2)
     } else if (frequency === "once per week" && timePeriod === "years") {
-      return currAmtNum * timeAmt * 52
-    }
+      return (currAmtNum * timeAmt * 52).toFixed(2)
+    } else if (frequency === "once per month" && timePeriod === "months") {
+      return (currAmtNum * timeAmt * 1).toFixed(2)
+    } else if (frequency === "once per month" && timePeriod === "years") {
+      return (currAmtNum * timeAmt * 12).toFixed(2)
+    } 
   }
 
   console.log(calculateTotal())
 
-  const total = calculateTotal().toFixed(2)
+  const total = calculateTotal()
 
   const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=1&page=1&sparkline=false&locale=en&precision=2"
 
