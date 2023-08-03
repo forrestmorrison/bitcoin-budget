@@ -32,25 +32,13 @@ const theme = createTheme({
 
 function App() {
   const [coin, setCoin] = useState([])
-  const [currencyAmt, setCurrencyAmt] = useState("")
-  const [currency, setCurrency] = useState("")
+  const [dollarAmt, setDollarAmt] = useState("")
   const [frequency, setFrequency] = useState("")
   const [timeAmt, setTimeAmt] = useState("")
   const [timePeriod, setTimePeriod] = useState("")
   const [price, setPrice] = useState("")
   
   const currentPrice = coin[0]
-
-  const currencies = [
-    {
-        value: "BTC",
-        label: "BTC"
-    },
-    {
-        value: "USD",
-        label: "USD"
-    },
-  ]
 
   const frequencies = [
     {
@@ -90,12 +78,8 @@ function App() {
     }
   ]
 
-  const onCurrencyAmtChange = (e) => {
-    setCurrencyAmt(e.target.value)
-  }
-
-  const onCurrencyChange = (e) => {
-    setCurrency(e.target.value)
+  const onDollarAmtChange = (e) => {
+    setDollarAmt(e.target.value)
   }
 
   const onFrequencyChange = (e) => {
@@ -114,30 +98,30 @@ function App() {
     setPrice(e.target.value)
 }
 
-  const currAmtNum = parseFloat(currencyAmt)
+  const dollarAmtNum = parseFloat(dollarAmt)
   const timeAmtNum = parseFloat(timeAmt)
   const priceNum = parseFloat(price)
 
   const calculateTotal = () => {
     // return currAmtNum * timeAmtNum * priceNum
     if (frequency === "once per day" && timePeriod === "days") {
-      return (currAmtNum * timeAmt * 1).toFixed(2)
+      return (dollarAmtNum * timeAmt * 1).toFixed(2)
     } else if (frequency === "once per day" && timePeriod === "weeks") {
-      return (currAmtNum * timeAmt * 7).toFixed(2)
+      return (dollarAmtNum * timeAmt * 7).toFixed(2)
     } else if (frequency === "once per day" && timePeriod === "months") {
-      return (currAmtNum * timeAmt * 30).toFixed(2)
+      return (dollarAmtNum * timeAmt * 30).toFixed(2)
     } else if (frequency === "once per day" && timePeriod === "years") {
-      return (currAmtNum * timeAmt * 365).toFixed(2)
+      return (dollarAmtNum * timeAmt * 365).toFixed(2)
     } else if (frequency === "once per week" && timePeriod === "weeks") {
-      return (currAmtNum * timeAmt * 1).toFixed(2)
+      return (dollarAmtNum * timeAmt * 1).toFixed(2)
     } else if (frequency === "once per week" && timePeriod === "months") {
-      return (currAmtNum * timeAmt * 4.28).toFixed(2)
+      return (dollarAmtNum * timeAmt * 4.28).toFixed(2)
     } else if (frequency === "once per week" && timePeriod === "years") {
-      return (currAmtNum * timeAmt * 52).toFixed(2)
+      return (dollarAmtNum * timeAmt * 52).toFixed(2)
     } else if (frequency === "once per month" && timePeriod === "months") {
-      return (currAmtNum * timeAmt * 1).toFixed(2)
+      return (dollarAmtNum * timeAmt * 1).toFixed(2)
     } else if (frequency === "once per month" && timePeriod === "years") {
-      return (currAmtNum * timeAmt * 12).toFixed(2)
+      return (dollarAmtNum * timeAmt * 12).toFixed(2)
     } 
   }
 
@@ -176,10 +160,10 @@ function App() {
           <div className="input-line">
             <TextField 
               id="outlined-basic" 
-              label="currency amount"
+              label="dollar amount"
               variant="outlined"
-              onChange={onCurrencyAmtChange}
-              value={currencyAmt}
+              onChange={onDollarAmtChange}
+              value={dollarAmt}
               required
               sx={{
                   m: 0.2,
@@ -189,30 +173,6 @@ function App() {
                   }
               }}
             />
-            <TextField 
-                id="outlined-select"
-                select
-                label="currency"
-                defaultValue=""
-                helperText="btc or usd"
-                variant="outlined"
-                onChange={onCurrencyChange}
-                value={currency}
-                required
-                sx={{
-                    m: 0.2,
-                    width: {
-                      xs: "100px",
-                      sm: "150px"
-                    }
-                }}
-            >
-                {currencies.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                    </MenuItem>
-                ))}
-            </TextField>
           </div>
           <h5>frequency rate to make recurring purchase:</h5>
           <div className="input-line">
