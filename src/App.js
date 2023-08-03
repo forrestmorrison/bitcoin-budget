@@ -114,9 +114,9 @@ function App() {
     setPrice(e.target.value)
 }
 
-  const currAmtNum = parseInt(currencyAmt)
-  const timeAmtNum = parseInt(timeAmt)
-  const priceNum = parseInt(price)
+  const currAmtNum = parseFloat(currencyAmt)
+  const timeAmtNum = parseFloat(timeAmt)
+  const priceNum = parseFloat(price)
 
   const calculateTotal = () => {
     // return currAmtNum * timeAmtNum * priceNum
@@ -128,12 +128,18 @@ function App() {
       return currAmtNum * timeAmt * 30
     } else if (frequency === "once per day" && timePeriod === "years") {
       return currAmtNum * timeAmt * 365
+    } else if (frequency === "once per week" && timePeriod === "weeks") {
+      return currAmtNum * timeAmt * 1
+    } else if (frequency === "once per week" && timePeriod === "months") {
+      return currAmtNum * timeAmt * 4.28
+    } else if (frequency === "once per week" && timePeriod === "years") {
+      return currAmtNum * timeAmt * 52
     }
   }
 
   console.log(calculateTotal())
 
-  const total = calculateTotal()
+  const total = calculateTotal().toFixed(2)
 
   const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=1&page=1&sparkline=false&locale=en&precision=2"
 
