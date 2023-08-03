@@ -328,7 +328,9 @@ function App() {
               Calculate
             </Button>
             <h4>total:</h4>
-            <p>${total}</p>
+            <p>${
+              isNaN(total) ? "" : total 
+            }</p>
           </div>
         </div>
       </div>
