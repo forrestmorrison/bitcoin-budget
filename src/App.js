@@ -103,7 +103,6 @@ function App() {
   const priceNum = parseFloat(price)
 
   const calculateTotal = () => {
-    // return currAmtNum * timeAmtNum * priceNum
     if (frequency === "once per day" && timePeriod === "days") {
       return (dollarAmtNum * timeAmt * 1).toFixed(2)
     } else if (frequency === "once per day" && timePeriod === "weeks") {
@@ -131,14 +130,14 @@ function App() {
 
   const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=1&page=1&sparkline=false&locale=en&precision=2"
 
-  // useEffect(() => {
-  //   axios.get(url).then((response) => {
-  //     setCoin(response.data)
-  //     console.log(response.data[0])
-  //   }).catch((error) => {
-  //     console.log(error)
-  //   })
-  // }, [])
+  useEffect(() => {
+    axios.get("/coins/bitcoin").then((response) => {
+      setCoin(response.data)
+      console.log(response.data.market_data.current_price.usd)
+    }).catch((error) => {
+      console.log(error)
+    })
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>
