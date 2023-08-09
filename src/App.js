@@ -38,7 +38,7 @@ function App() {
   const [timePeriod, setTimePeriod] = useState("")
   const [price, setPrice] = useState("")
   
-  const currentPrice = coin[0]
+  const currentPrice = coin
 
   const frequencies = [
     {
@@ -132,7 +132,7 @@ function App() {
 
   useEffect(() => {
     axios.get("/coins/bitcoin").then((response) => {
-      setCoin(response.data)
+      setCoin(response.data.market_data.current_price.usd)
       console.log(response.data.market_data.current_price.usd)
     }).catch((error) => {
       console.log(error)
@@ -151,7 +151,7 @@ function App() {
           </div>
           <div className="btc-price">
             <h4>Current <FaBitcoin size="18px" style={{ margin: "0px 10px", color: "#F2A900"}}/> Price:</h4>
-            <h4>${}</h4>
+            <h4>${currentPrice}</h4>
           </div>
         </header>
         <div className="container">
