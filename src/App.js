@@ -37,6 +37,8 @@ function App() {
   const [timeAmt, setTimeAmt] = useState("")
   const [timePeriod, setTimePeriod] = useState("")
   const [price, setPrice] = useState("")
+  const [btcPrice, setBtcPrice] = useState("")
+  const [dollarPrice, setDollarPrice] = useState("")
   
   const currentPrice = coin
 
@@ -131,6 +133,11 @@ function App() {
       btcTotal = ((dollarAmtNum * timeAmt * 12).toFixed(2) / price)
       dollarTotal = ((dollarAmtNum * timeAmt * 12).toFixed(2))
     } 
+  }
+
+  const handleClick = () => {
+    setBtcPrice(btcTotal)
+    setDollarPrice(dollarTotal)
   }
 
   console.log(calculateTotal())
@@ -296,6 +303,7 @@ function App() {
           </div>
           <div className="total-line">
             <Button
+              onClick={handleClick}
               sx={{
                 m: 1,
                 px: 2,
@@ -320,10 +328,10 @@ function App() {
                 <>
                   <div className="btc-total">
                     <FaBitcoin size="20px" style={{ marginRight: "10px", color: "#F2A900"}}/>
-                    <p>{ btcTotal }</p>
+                    <p>{ btcPrice }</p>
                   </div>
                   <div className="btc-total">
-                    <p>$ { dollarTotal }</p>
+                    <p>$ { dollarPrice }</p>
                   </div>
                 </>
               )
