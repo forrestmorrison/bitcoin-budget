@@ -107,21 +107,29 @@ function App() {
       btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price)
       dollarTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2))
     } else if (frequency === "once per day" && timePeriod === "weeks") {
-      return (dollarAmtNum * timeAmt * 7).toFixed(2)
+      btcTotal = ((dollarAmtNum * timeAmt * 7).toFixed(2) / price)
+      dollarTotal = ((dollarAmtNum * timeAmt * 7).toFixed(2))
     } else if (frequency === "once per day" && timePeriod === "months") {
-      return (dollarAmtNum * timeAmt * 30).toFixed(2)
+      btcTotal = ((dollarAmtNum * timeAmt * 30).toFixed(2) / price)
+      dollarTotal = ((dollarAmtNum * timeAmt * 30).toFixed(2))
     } else if (frequency === "once per day" && timePeriod === "years") {
-      return (dollarAmtNum * timeAmt * 365).toFixed(2)
+      btcTotal = ((dollarAmtNum * timeAmt * 365).toFixed(2) / price)
+      dollarTotal = ((dollarAmtNum * timeAmt * 365).toFixed(2))
     } else if (frequency === "once per week" && timePeriod === "weeks") {
-      return (dollarAmtNum * timeAmt * 1).toFixed(2)
+      btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price)
+      dollarTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2))
     } else if (frequency === "once per week" && timePeriod === "months") {
-      return (dollarAmtNum * timeAmt * 4.28).toFixed(2)
+      btcTotal = ((dollarAmtNum * timeAmt * 4.28).toFixed(2) / price)
+      dollarTotal = ((dollarAmtNum * timeAmt * 4.28).toFixed(2))
     } else if (frequency === "once per week" && timePeriod === "years") {
-      return (dollarAmtNum * timeAmt * 52).toFixed(2)
+      btcTotal = ((dollarAmtNum * timeAmt * 52).toFixed(2) / price)
+      dollarTotal = ((dollarAmtNum * timeAmt * 52).toFixed(2))
     } else if (frequency === "once per month" && timePeriod === "months") {
-      return (dollarAmtNum * timeAmt * 1).toFixed(2)
+      btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price)
+      dollarTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2))
     } else if (frequency === "once per month" && timePeriod === "years") {
-      return (dollarAmtNum * timeAmt * 12).toFixed(2)
+      btcTotal = ((dollarAmtNum * timeAmt * 12).toFixed(2) / price)
+      dollarTotal = ((dollarAmtNum * timeAmt * 12).toFixed(2))
     } 
   }
 
