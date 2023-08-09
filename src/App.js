@@ -99,12 +99,13 @@ function App() {
   }
 
   const dollarAmtNum = parseFloat(dollarAmt)
-  const timeAmtNum = parseFloat(timeAmt)
-  const priceNum = parseFloat(price)
+  let btcTotal = ""
+  let dollarTotal = ""
 
   const calculateTotal = () => {
     if (frequency === "once per day" && timePeriod === "days") {
-      return (dollarAmtNum * timeAmt * 1).toFixed(2) / price
+      btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price)
+      dollarTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2))
     } else if (frequency === "once per day" && timePeriod === "weeks") {
       return (dollarAmtNum * timeAmt * 7).toFixed(2)
     } else if (frequency === "once per day" && timePeriod === "months") {
@@ -125,8 +126,6 @@ function App() {
   }
 
   console.log(calculateTotal())
-
-  const total = calculateTotal()
 
   useEffect(() => {
     axios.get("/coins/bitcoin").then((response) => {
@@ -308,12 +307,17 @@ function App() {
             </Button>
             <h4>total:</h4>
             {
-              isNaN(total) ? ("") :
+              isNaN(btcTotal) ? ("") :
               (
-                <div className="btc-total">
-                  <FaBitcoin size="20px" style={{ marginRight: "10px", color: "#F2A900"}}/>
-                  <p>{ total }</p>
-                </div>
+                <>
+                  <div className="btc-total">
+                    <FaBitcoin size="20px" style={{ marginRight: "10px", color: "#F2A900"}}/>
+                    <p>{ btcTotal }</p>
+                  </div>
+                  <div className="btc-total">
+                    <p>$ { dollarTotal }</p>
+                  </div>
+                </>
               )
             }
           </div>
