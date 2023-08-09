@@ -91,6 +91,11 @@ h5 {
   justify-content: space-evenly;
 }
 
+.btc-total {
+  display: flex;
+  align-items: center;
+}
+
 
 
 @media screen and (max-width: 500px) {

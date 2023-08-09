@@ -96,7 +96,7 @@ function App() {
 
   const onPriceChange = (e) => {
     setPrice(e.target.value)
-}
+  }
 
   const dollarAmtNum = parseFloat(dollarAmt)
   const timeAmtNum = parseFloat(timeAmt)
@@ -104,7 +104,7 @@ function App() {
 
   const calculateTotal = () => {
     if (frequency === "once per day" && timePeriod === "days") {
-      return (dollarAmtNum * timeAmt * 1).toFixed(2)
+      return (dollarAmtNum * timeAmt * 1).toFixed(2) / price
     } else if (frequency === "once per day" && timePeriod === "weeks") {
       return (dollarAmtNum * timeAmt * 7).toFixed(2)
     } else if (frequency === "once per day" && timePeriod === "months") {
@@ -127,8 +127,6 @@ function App() {
   console.log(calculateTotal())
 
   const total = calculateTotal()
-
-  const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=1&page=1&sparkline=false&locale=en&precision=2"
 
   useEffect(() => {
     axios.get("/coins/bitcoin").then((response) => {
@@ -259,9 +257,10 @@ function App() {
                 }}
               >
                 <FormControlLabel 
-                  value="current-btc-price" 
-                  control={<Radio />} 
+                  control={<Radio />}
+                  value={currentPrice} 
                   label={"current BTC price"}
+                  id="current-price"
                   sx={{
                       m: 0.2,
                       mb: "20px"
@@ -269,12 +268,14 @@ function App() {
                 />
                 <FormControlLabel 
                   control={<Radio sx={{ mb: "20px" }} />} 
+                  value={price}
                   label={<TextField 
                             label="enter target BTC price"
                             helperText="target btc price"
                             onChange={onPriceChange}
                             value={price}
                         />}
+                  id="target-price"
                   sx={{
                       m: 0.2,
                       width: {
@@ -306,9 +307,15 @@ function App() {
               Calculate
             </Button>
             <h4>total:</h4>
-            <p>${
-              isNaN(total) ? "" : total 
-            }</p>
+            {
+              isNaN(total) ? ("") :
+              (
+                <div className="btc-total">
+                  <FaBitcoin size="20px" style={{ marginRight: "10px", color: "#F2A900"}}/>
+                  <p>{ total }</p>
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
