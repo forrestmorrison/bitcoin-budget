@@ -106,31 +106,31 @@ function App() {
 
   const calculateTotal = () => {
     if (frequency === "once per day" && timePeriod === "days") {
-      btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price)
+      btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price).toFixed(8)
       dollarTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2))
     } else if (frequency === "once per day" && timePeriod === "weeks") {
-      btcTotal = ((dollarAmtNum * timeAmt * 7).toFixed(2) / price)
+      btcTotal = ((dollarAmtNum * timeAmt * 7).toFixed(2) / price).toFixed(8)
       dollarTotal = ((dollarAmtNum * timeAmt * 7).toFixed(2))
     } else if (frequency === "once per day" && timePeriod === "months") {
-      btcTotal = ((dollarAmtNum * timeAmt * 30).toFixed(2) / price)
+      btcTotal = ((dollarAmtNum * timeAmt * 30).toFixed(2) / price).toFixed(8)
       dollarTotal = ((dollarAmtNum * timeAmt * 30).toFixed(2))
     } else if (frequency === "once per day" && timePeriod === "years") {
-      btcTotal = ((dollarAmtNum * timeAmt * 365).toFixed(2) / price)
+      btcTotal = ((dollarAmtNum * timeAmt * 365).toFixed(2) / price).toFixed(8)
       dollarTotal = ((dollarAmtNum * timeAmt * 365).toFixed(2))
     } else if (frequency === "once per week" && timePeriod === "weeks") {
-      btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price)
+      btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price).toFixed(8)
       dollarTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2))
     } else if (frequency === "once per week" && timePeriod === "months") {
-      btcTotal = ((dollarAmtNum * timeAmt * 4.28).toFixed(2) / price)
+      btcTotal = ((dollarAmtNum * timeAmt * 4.28).toFixed(2) / price).toFixed(8)
       dollarTotal = ((dollarAmtNum * timeAmt * 4.28).toFixed(2))
     } else if (frequency === "once per week" && timePeriod === "years") {
-      btcTotal = ((dollarAmtNum * timeAmt * 52).toFixed(2) / price)
+      btcTotal = ((dollarAmtNum * timeAmt * 52).toFixed(2) / price).toFixed(8)
       dollarTotal = ((dollarAmtNum * timeAmt * 52).toFixed(2))
     } else if (frequency === "once per month" && timePeriod === "months") {
-      btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price)
+      btcTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2) / price).toFixed(8)
       dollarTotal = ((dollarAmtNum * timeAmt * 1).toFixed(2))
     } else if (frequency === "once per month" && timePeriod === "years") {
-      btcTotal = ((dollarAmtNum * timeAmt * 12).toFixed(2) / price)
+      btcTotal = ((dollarAmtNum * timeAmt * 12).toFixed(2) / price).toFixed(8)
       dollarTotal = ((dollarAmtNum * timeAmt * 12).toFixed(2))
     }
   }
@@ -141,8 +141,6 @@ function App() {
     setBtcPrice(btcTotal)
     setDollarPrice(dollarTotal)
   }
-
-  
 
   useEffect(() => {
     axios.get("/coins/bitcoin").then((response) => {
@@ -257,7 +255,7 @@ function App() {
             </TextField>
           </div>
           <h5>at average price of:</h5>
-          <div className="total-line">
+          <div className="price-input-line">
             <TextField 
               label="enter target BTC price"
               onChange={onPriceChange}
@@ -305,20 +303,15 @@ function App() {
               Calculate
             </Button>
             <h4>total:</h4>
-            {
-              (btcTotal === "" || btcTotal === Infinity) ? ("") :
-              (
-                <>
-                  <div className="btc-total">
-                    <FaBitcoin size="20px" style={{ marginRight: "10px", color: "#F2A900"}}/>
-                    <p>{ btcPrice }</p>
-                  </div>
-                  <div className="btc-total">
-                    <p>$ { dollarPrice }</p>
-                  </div>
-                </>
-              )
-            }
+            <>
+              <div className="btc-total">
+                <FaBitcoin size="20px" style={{ marginRight: "10px", color: "#F2A900"}}/>
+                <p>{ btcPrice }</p>
+              </div>
+              <div className="btc-total">
+                <p>$ { dollarPrice }</p>
+              </div>
+            </>
           </div>
         </div>
       </div>

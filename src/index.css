@@ -83,6 +83,14 @@ h5 {
   justify-content: space-between;
 }
 
+.price-input-line {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .total-line {
   width: 100%;
   padding: 10px;
@@ -94,9 +102,12 @@ h5 {
 .btc-total {
   display: flex;
   align-items: center;
+  margin: 0 10px;
 }
 
-
+.btc-total p {
+  font-weight: bold;
+}
 
 @media screen and (max-width: 500px) {
   .logo h2 {
