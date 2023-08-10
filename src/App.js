@@ -5,10 +5,6 @@ import { createTheme } from "@mui/material/styles"
 import {
   Button,
   MenuItem,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
   TextField
 } from "@mui/material"
 import axios from "axios"
@@ -100,6 +96,10 @@ function App() {
     setPrice(e.target.value)
   }
 
+  const onCurrentPriceChange = () => {
+    setPrice(currentPrice)
+  }
+
   const dollarAmtNum = parseFloat(dollarAmt)
   let btcTotal = ""
   let dollarTotal = ""
@@ -132,24 +132,28 @@ function App() {
     } else if (frequency === "once per month" && timePeriod === "years") {
       btcTotal = ((dollarAmtNum * timeAmt * 12).toFixed(2) / price)
       dollarTotal = ((dollarAmtNum * timeAmt * 12).toFixed(2))
-    } 
+    }
   }
+
+  calculateTotal()
 
   const handleClick = () => {
     setBtcPrice(btcTotal)
     setDollarPrice(dollarTotal)
   }
 
-  console.log(calculateTotal())
+  
 
   useEffect(() => {
     axios.get("/coins/bitcoin").then((response) => {
       setCoin(response.data.market_data.current_price.usd)
-      console.log(response.data.market_data.current_price.usd)
+      // console.log(response.data.market_data.current_price.usd)
     }).catch((error) => {
       console.log(error)
     })
   }, [])
+
+  console.log(btcTotal)
 
   return (
     <ThemeProvider theme={theme}>
@@ -252,54 +256,33 @@ function App() {
               ))}
             </TextField>
           </div>
-          <h5>at price of:</h5>
-          <div className="input-line">
-            <FormControl
+          <h5>at average price of:</h5>
+          <div className="total-line">
+            <TextField 
+              label="enter target BTC price"
+              onChange={onPriceChange}
+              value={price}
+            />
+            <Button
+              value={currentPrice}
+              onClick={onCurrentPriceChange}
               sx={{
-                width: 1
+                m: 1,
+                px: 2,
+                backgroundColor: "white",
+                color: "#F2A900",
+                  "&:hover": {
+                    backgroundColor: "white",
+                    color: "black",
+                  },
+                  "&.Mui-disabled": {
+                    background: "white",
+                    color: "grey"
+                  }
               }}
             >
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="female"
-                name="radio-buttons-group"
-                sx={{
-                  width: 1,
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between"
-                }}
-              >
-                <FormControlLabel 
-                  control={<Radio />}
-                  value={currentPrice} 
-                  label={"current BTC price"}
-                  id="current-price"
-                  sx={{
-                      m: 0.2,
-                      mb: "20px"
-                  }}
-                />
-                <FormControlLabel 
-                  control={<Radio sx={{ mb: "20px" }} />} 
-                  value={price}
-                  label={<TextField 
-                            label="enter target BTC price"
-                            helperText="target btc price"
-                            onChange={onPriceChange}
-                            value={price}
-                        />}
-                  id="target-price"
-                  sx={{
-                      m: 0.2,
-                      width: {
-                        xs: "120px",
-                        sm: "190px"
-                      }
-                  }}
-                />
-              </RadioGroup>
-            </FormControl>
+              use current <FaBitcoin size="20px" style={{ margin: "10px", color: "#F2A900"}}/> price
+            </Button>
           </div>
           <div className="total-line">
             <Button
@@ -323,7 +306,7 @@ function App() {
             </Button>
             <h4>total:</h4>
             {
-              isNaN(btcTotal) ? ("") :
+              (btcTotal === "" || btcTotal === Infinity) ? ("") :
               (
                 <>
                   <div className="btc-total">
