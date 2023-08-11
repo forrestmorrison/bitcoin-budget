@@ -99,6 +99,10 @@ h5 {
   justify-content: space-evenly;
 }
 
+.total {
+  display: flex;
+}
+
 .btc-total {
   display: flex;
   align-items: center;
@@ -118,4 +122,11 @@ h5 {
     height: 30px;
   }
 
+  .price-input-line {
+    flex-direction: column;
+  }
+
+  .total-line {
+    flex-direction: column;
+  }
 }

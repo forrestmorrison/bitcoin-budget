@@ -303,7 +303,7 @@ function App() {
               Calculate
             </Button>
             <h4>total:</h4>
-            <>
+            <div className="total">
               <div className="btc-total">
                 <FaBitcoin size="20px" style={{ marginRight: "10px", color: "#F2A900"}}/>
                 <p>{ btcPrice }</p>
@@ -311,7 +311,7 @@ function App() {
               <div className="btc-total">
                 <p>$ { dollarPrice }</p>
               </div>
-            </>
+            </div>
           </div>
         </div>
       </div>
