@@ -33,8 +33,10 @@ function App() {
   const [timeAmt, setTimeAmt] = useState("")
   const [timePeriod, setTimePeriod] = useState("")
   const [price, setPrice] = useState("")
-  const [btcPrice, setBtcPrice] = useState("")
+  const [btcAmt, setBtcAmt] = useState("")
   const [dollarPrice, setDollarPrice] = useState("")
+  const [targetBTCPrice, setTargetBTCPrice] = useState("")
+  const [targetDollarAmt, setTargetDollarAmt] = useState("")
   
   const currentPrice = coin
 
@@ -100,9 +102,14 @@ function App() {
     setPrice(currentPrice)
   }
 
+  const onTargetPriceChange = (e) => {
+    setTargetBTCPrice(e.target.value)
+  }
+
   const dollarAmtNum = parseFloat(dollarAmt)
   let btcTotal = ""
   let dollarTotal = ""
+  let targetTotal = ""
 
   const calculateTotal = () => {
     if (frequency === "per day" && timePeriod === "days") {
@@ -137,9 +144,19 @@ function App() {
 
   calculateTotal()
 
+  const calculateTargetPrice = () => {
+    targetTotal = (btcAmt * targetBTCPrice).toFixed(2)
+  }
+
+  calculateTargetPrice()
+
   const handleClick = () => {
-    setBtcPrice(btcTotal)
+    setBtcAmt(btcTotal)
     setDollarPrice(dollarTotal)
+  }
+
+  const handleTargetClick = () => {
+    setTargetDollarAmt(targetTotal)
   }
 
   useEffect(() => {
@@ -257,9 +274,10 @@ function App() {
           <h5>at average price of:</h5>
           <div className="price-input-line">
             <TextField 
-              label="enter average BTC price"
+              label="average BTC price"
               onChange={onPriceChange}
               value={price}
+              required
             />
             <Button
               value={currentPrice}
@@ -306,12 +324,47 @@ function App() {
             <div className="total">
               <div className="btc-total">
                 <FaBitcoin size="20px" style={{ marginRight: "10px", color: "#F2A900"}}/>
-                <p>{ btcPrice }</p>
+                <p>{ btcAmt }</p>
               </div>
               <div className="btc-total">
                 <p>$ { dollarPrice }</p>
               </div>
             </div>
+          </div>
+          <h5>enter your target BTC price:</h5>
+          <div className="price-input-line">
+            <TextField 
+              label="target BTC price"
+              onChange={onTargetPriceChange}
+              value={targetBTCPrice}
+              required
+            />
+            <Button
+              onClick={handleTargetClick}
+              sx={{
+                m: 1,
+                px: 2,
+                backgroundColor: "#F2A900",
+                color: "white",
+                  "&:hover": {
+                    backgroundColor: "white",
+                    color: "#F2A900",
+                  },
+                  "&.Mui-disabled": {
+                    background: "white",
+                    color: "grey"
+                  }
+              }}
+            >
+              SHOW ME THE $
+            </Button>
+          </div>
+          <div className="profit-total-line">
+            <h4>at this price, your
+              <FaBitcoin size="20px" style={{ margin: "0 6px", marginBottom: "-5px", color: "#F2A900"}}/>
+              will be worth:
+            </h4>
+            <p>$ { targetDollarAmt }</p>
           </div>
         </div>
       </div>

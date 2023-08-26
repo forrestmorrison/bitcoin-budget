@@ -113,6 +113,19 @@ h5 {
   font-weight: bold;
 }
 
+.profit-total-line {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-weight: bold;
+}
+
+.profit-total-line h4 {
+  align-items: center;
+}
+
 @media screen and (max-width: 500px) {
   .logo h2 {
     font-size: 40px;
@@ -127,6 +140,10 @@ h5 {
   }
 
   .total-line {
+    flex-direction: column;
+  }
+
+  .profit-total-line {
     flex-direction: column;
   }
 }
