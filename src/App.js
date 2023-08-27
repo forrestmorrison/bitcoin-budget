@@ -37,6 +37,7 @@ function App() {
   const [dollarPrice, setDollarPrice] = useState("")
   const [targetBTCPrice, setTargetBTCPrice] = useState("")
   const [targetDollarAmt, setTargetDollarAmt] = useState("")
+  const [profitAmt, setProfitAmt] = useState("")
   
   const currentPrice = coin
 
@@ -110,6 +111,7 @@ function App() {
   let btcTotal = ""
   let dollarTotal = ""
   let targetTotal = ""
+  let profit = ""
 
   const calculateTotal = () => {
     if (frequency === "per day" && timePeriod === "days") {
@@ -146,6 +148,7 @@ function App() {
 
   const calculateTargetPrice = () => {
     targetTotal = (btcAmt * targetBTCPrice).toFixed(2)
+    profit = (targetTotal - dollarTotal).toFixed(2)
   }
 
   calculateTargetPrice()
@@ -157,7 +160,10 @@ function App() {
 
   const handleTargetClick = () => {
     setTargetDollarAmt(targetTotal)
+    setProfitAmt(profit)
   }
+
+  console.log(profit)
 
   useEffect(() => {
     axios.get("/coins/bitcoin").then((response) => {
@@ -339,32 +345,36 @@ function App() {
               value={targetBTCPrice}
               required
             />
-            <Button
-              onClick={handleTargetClick}
-              sx={{
-                m: 1,
-                px: 2,
-                backgroundColor: "#F2A900",
-                color: "white",
-                  "&:hover": {
-                    backgroundColor: "white",
-                    color: "#F2A900",
-                  },
-                  "&.Mui-disabled": {
-                    background: "white",
-                    color: "grey"
-                  }
-              }}
-            >
-              SHOW ME THE $
-            </Button>
+            <div className="profit-button">
+              <Button
+                onClick={handleTargetClick}
+                sx={{
+                  m: 1,
+                  mt: { xs: 4, md: 0 },
+                  px: 2,
+                  backgroundColor: "#F2A900",
+                  color: "white",
+                    "&:hover": {
+                      backgroundColor: "white",
+                      color: "#F2A900",
+                    },
+                    "&.Mui-disabled": {
+                      background: "white",
+                      color: "grey"
+                    }
+                }}
+              >
+                SHOW ME THE $
+              </Button>
+            </div>
           </div>
           <div className="profit-total-line">
-            <h4>at this price, your
-              <FaBitcoin size="20px" style={{ margin: "0 6px", marginBottom: "-5px", color: "#F2A900"}}/>
-              will be worth:
-            </h4>
+            <h5>at target price, your total amount of Bitcoin will be worth:</h5>
             <p>$ { targetDollarAmt }</p>
+          </div>
+          <div className="profit-total-line">
+            <h4>total profit:</h4>
+            <p>$ { profitAmt }</p>
           </div>
         </div>
       </div>
